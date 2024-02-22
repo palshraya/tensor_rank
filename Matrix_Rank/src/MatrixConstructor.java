@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class MatrixConstructor {
     public int row;
@@ -25,6 +26,7 @@ public class MatrixConstructor {
         this.values = v;
     }
 
+    // creates array values for N x N identity matrix
     public static double[] NbyNIdentity(int N) {
         double[] elems = new double[N * N];
         for (int i = 0; i < N; i++) {
@@ -33,6 +35,7 @@ public class MatrixConstructor {
         return elems;
     }
 
+    // returns a MatrixConstructor instance whose values are elements of original array w/o specified row and column
     public MatrixConstructor ExcludingSubMatrix(int row, int col) {
         ArrayList<ArrayList<Double>> m = new ArrayList();
         for (ArrayList<Double> rowItem : this.values){
@@ -48,6 +51,7 @@ public class MatrixConstructor {
         return returnMatrix;
     }
 
+    // calculates determinant of matrix, assumes matrix is square
     public double Determinant() {
         double determinant = 0.0;
         if (this.values.size() == 1) {
@@ -55,10 +59,16 @@ public class MatrixConstructor {
         }
         else{
             for (int i = 0; i < this.values.size(); i++) {
-                // cofactor expansion
-                determinant = determinant + (this.values.get(0).get(i) * this.ExcludingSubMatrix(0, i).Determinant());
+                // cofactor expansion --> runtime analysis: https://informatika.stei.itb.ac.id/~rinaldi.munir/Matdis/2016-2017/Makalah2016/Makalah-Matdis-2016-051.pdf
+                determinant = determinant + (Math.pow(-1, i%2) * (this.values.get(0).get(i) * this.ExcludingSubMatrix(0, i).Determinant()));
             }
         }
         return determinant;
     }
+
+    // calculates rank of matrix, assumes matrix is square
+    public int Rank(){
+        
+    }
+
 }
