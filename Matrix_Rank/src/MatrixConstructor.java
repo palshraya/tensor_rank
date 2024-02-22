@@ -33,9 +33,11 @@ public class MatrixConstructor {
         return elems;
     }
 
-
     public MatrixConstructor ExcludingSubMatrix(int row, int col) {
-        ArrayList<ArrayList<Double>> m = new ArrayList(this.values);
+        ArrayList<ArrayList<Double>> m = new ArrayList();
+        for (ArrayList<Double> rowItem : this.values){
+            m.add((ArrayList<Double>) rowItem.clone()); //create deepcopy of list
+        }
         m.remove(row);
         for (int i = 0; i < m.size(); i++) {
             ArrayList<Double> toReplace = m.get(i);
@@ -54,7 +56,7 @@ public class MatrixConstructor {
         else{
             for (int i = 0; i < this.values.size(); i++) {
                 // cofactor expansion
-                determinant = determinant + (this.values.get(0).get(i) * ExcludingSubMatrix(0, i).Determinant());
+                determinant = determinant + (this.values.get(0).get(i) * this.ExcludingSubMatrix(0, i).Determinant());
             }
         }
         return determinant;
