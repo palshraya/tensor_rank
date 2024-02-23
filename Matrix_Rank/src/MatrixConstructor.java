@@ -28,7 +28,6 @@ public class MatrixConstructor {
         this.row = r;
         this.col = c;
         this.values = v;
-        determinantTracker.clear();
     }
 
     // creates array values for N x N identity matrix
@@ -43,7 +42,7 @@ public class MatrixConstructor {
     // returns a MatrixConstructor instance whose values are elements of original array w/o specified row and column
     public MatrixConstructor ExcludingSubMatrix(int row, int col) {
         ArrayList<ArrayList<Double>> m = new ArrayList();
-        for (ArrayList<Double> rowItem : this.values){
+        for (ArrayList<Double> rowItem : this.values) {
             m.add((ArrayList<Double>) rowItem.clone()); //create deepcopy of list
         }
         m.remove(row);
@@ -57,42 +56,32 @@ public class MatrixConstructor {
     }
 
     // calculates determinant of matrix, assumes matrix is square
-    // something wrong w/ the indexing!!
     public double Determinant() {
         double determinant = 0.0;
         if (this.values.size() == 1) {
             determinant = determinant + this.values.get(0).get(0);
 
-        }
-        else{
+        } else {
             for (int i = 0; i < this.values.size(); i++) {
                 // cofactor expansion --> runtime analysis: https://informatika.stei.itb.ac.id/~rinaldi.munir/Matdis/2016-2017/Makalah2016/Makalah-Matdis-2016-051.pdf
                 MatrixConstructor subMatrix = ExcludingSubMatrix(0, i);
                 withoutIndices.add(i);
                 double subMatrixDet = subMatrix.Determinant();
-
-                //maybe we dont need this here
-//                ArrayList<Integer> myKey = new ArrayList(withoutIndices);
-//                determinantTracker.put(myKey, subMatrixDet);
-                withoutIndices.remove(withoutIndices.size()-1);
-
-                // myKey = withoutIndices
-
-                determinant = determinant + (Math.pow(-1, i%2) * (this.values.get(0).get(i) * subMatrixDet));
+                withoutIndices.remove(withoutIndices.size() - 1);
+                determinant = determinant + (Math.pow(-1, i % 2) * (this.values.get(0).get(i) * subMatrixDet));
             }
         }
         ArrayList<Integer> myKey = new ArrayList(withoutIndices);
         determinantTracker.put(myKey, determinant);
-//        withoutIndices.remove(withoutIndices.size()-1); // this step is causing the error --> maybe relocate?
         return determinant;
     }
 
-    // calculates rank of matrix, assumes matrix is square
-//    public int Rank(){
-//        if (this.Determinant() != 0.0){
-//            return this.row;
-//        }
-//
-//    }
+    //calculates rank of matrix, assumes matrix is square
+    public int Rank() {
+        if (this.Determinant() != 0.0) {
+            return this.row;
+        }
 
+    }
 }
+
