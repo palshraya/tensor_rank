@@ -6,7 +6,7 @@ public class MatrixConstructor {
     public int row;
     public int col;
     public ArrayList<ArrayList<Double>> values;
-    public static HashMap<ArrayList<Integer>, Double> determinantTracker = new HashMap<>();
+    public static HashMap<ArrayList<Integer>, Double> determinantTracker = new HashMap<>(); //TreeMap, fix array comparable method
     public static ArrayList<Integer> withoutIndices = new ArrayList<>();
 
     //assumes correct dimensions are passed in
@@ -81,6 +81,13 @@ public class MatrixConstructor {
         if (this.Determinant() != 0.0) {
             return this.row;
         }
+        for (HashMap.Entry<ArrayList<Integer>, Double> entry : determinantTracker.entrySet()){
+            ArrayList<Integer> key = entry.getKey();
+            Double value = entry.getValue();
+            
+
+        }
+
 
     }
 }
