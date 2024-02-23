@@ -42,4 +42,23 @@ public class MatrixRankTest {
         System.out.println(matrix.Determinant());
         System.out.println(matrix.determinantTracker);
     }
+
+    @Test
+    //check rank method for simple matrix
+    public void RankSimple(){
+        double[] myElems = new double[]{93.0, 186.0, 12.0, 279.0, 28.0, 61.0, 122.0, 35.0, 183.0, 19.0, 63.0, 126.0, 8.0, 189.0, 25.0, 57.0, 114.0, 94.0, 171.0, 72.0, 6.0, 12.0, 84.0, 18.0, 11.0};
+        MatrixConstructor matrix = new MatrixConstructor(5, 5, myElems);
+        System.out.println("the matrix is: " + matrix.values);
+        matrix.Rank();
+    }
+
+    @Test
+    //check rank method for more complex matrix
+    public void RankMoreComplex(){
+        double[] myElems = new double[]{};
+        MatrixConstructor matrix = new MatrixConstructor(3, 3, myElems);
+        System.out.println("the matrix is: " + matrix.values);
+        matrix.Rank();
+    }
+
 }

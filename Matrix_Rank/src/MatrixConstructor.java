@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.lang.Math;
+import java.util.List;
+import java.util.stream.IntStream;
 
+//write toString method!
 public class MatrixConstructor {
     public int row;
     public int col;
@@ -77,18 +80,39 @@ public class MatrixConstructor {
     }
 
     //calculates rank of matrix, assumes matrix is square
+    //is a way to make this faster by storing the rank of the submatrices in the dict
     public int Rank() {
         if (this.Determinant() != 0.0) {
             return this.row;
         }
-        for (HashMap.Entry<ArrayList<Integer>, Double> entry : determinantTracker.entrySet()){
-            ArrayList<Integer> key = entry.getKey();
-            Double value = entry.getValue();
-            
-
+        for (int i = 1; i < this.row; i++){
+            for (HashMap.Entry<ArrayList<Integer>, Double> entry : determinantTracker.entrySet()) {
+                ArrayList<Integer> key = entry.getKey();
+                Double value = entry.getValue();
+                // might need another for loop iterating through all the values of key.size()
+                if (key.size() == i && value != 0) {
+                    System.out.println("lin ind submatrix size: " + (this.row - i) + " by " + (this.row - i));
+                    System.out.println("indices of lin ind submatrix: " + ColumnIndices(this.row, key));
+                    System.out.println("rank: " + (this.row - i));
+                    return this.row - i;
+                }
+            }
         }
-
-
+        return 0;
     }
+
+    public ArrayList<Integer> ColumnIndices(int size, ArrayList<Integer> excluded){
+        ArrayList<Integer> indices = new ArrayList<>();
+        for (int i = 0; i < size; i++){
+            indices.add(i);
+        }
+        for (int elem : excluded){
+            indices.remove(elem);
+        }
+        return indices;
+    }
+
+
+
 }
 
