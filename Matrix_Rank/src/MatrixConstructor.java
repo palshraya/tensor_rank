@@ -7,7 +7,7 @@ public class MatrixConstructor {
     public int col;
     public ArrayList<ArrayList<Double>> values;
     public static HashMap<ArrayList<Integer>, Double> determinantTracker = new HashMap<>();
-    public static ArrayList<Integer> withoutIndices;
+    public static ArrayList<Integer> withoutIndices = new ArrayList<>();
 
     //assumes correct dimensions are passed in
     public MatrixConstructor(int r, int c, double[] v) {
@@ -57,6 +57,7 @@ public class MatrixConstructor {
     }
 
     // calculates determinant of matrix, assumes matrix is square
+    // something wrong w/ the indexing!!
     public double Determinant() {
         double determinant = 0.0;
         if (this.values.size() == 1) {
@@ -70,22 +71,28 @@ public class MatrixConstructor {
                 withoutIndices.add(i);
                 double subMatrixDet = subMatrix.Determinant();
 
+                ArrayList<Integer> myKey = new ArrayList(withoutIndices);
+                determinantTracker.put(myKey, subMatrixDet);
+                withoutIndices.remove(withoutIndices.size()-1);
+
                 // myKey = withoutIndices
 
                 determinant = determinant + (Math.pow(-1, i%2) * (this.values.get(0).get(i) * subMatrixDet));
             }
         }
-        determinantTracker.put(withoutIndices, determinant);
-        withoutIndices.remove(withoutIndices.size()-1);
+//        //to delete from here
+//        ArrayList<Integer> myKey = new ArrayList(withoutIndices);
+//        determinantTracker.put(myKey, determinant);
+//        withoutIndices.remove(withoutIndices.size()-1); // this step is causing the error --> maybe relocate?
         return determinant;
     }
 
     // calculates rank of matrix, assumes matrix is square
-    public int Rank(){
-        if (this.Determinant() != 0.0){
-            return this.row;
-        }
-
-    }
+//    public int Rank(){
+//        if (this.Determinant() != 0.0){
+//            return this.row;
+//        }
+//
+//    }
 
 }

@@ -37,8 +37,9 @@ public class MatrixRankTest {
     @Test
     //check whether determinant on more complicated matrix works
     public void ComplexDeterminant(){
-        double[] myElems = new double[]{1.0, 2.0, 3.0, 4.0, 5.0, 9.0, 7.0, 8.0, 13.0};
-        MatrixConstructor matrix = new MatrixConstructor(3, 3, myElems);
+        double[] myElems = new double[]{1.0, 2.0, 3.0, 4.0};
+        MatrixConstructor matrix = new MatrixConstructor(2, 2, myElems);
         System.out.println(matrix.Determinant());
+        System.out.println(matrix.determinantTracker);
     }
 }
