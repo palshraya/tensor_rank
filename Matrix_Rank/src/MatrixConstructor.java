@@ -71,8 +71,9 @@ public class MatrixConstructor {
                 withoutIndices.add(i);
                 double subMatrixDet = subMatrix.Determinant();
 
-                ArrayList<Integer> myKey = new ArrayList(withoutIndices);
-                determinantTracker.put(myKey, subMatrixDet);
+                //maybe we dont need this here
+//                ArrayList<Integer> myKey = new ArrayList(withoutIndices);
+//                determinantTracker.put(myKey, subMatrixDet);
                 withoutIndices.remove(withoutIndices.size()-1);
 
                 // myKey = withoutIndices
@@ -80,9 +81,8 @@ public class MatrixConstructor {
                 determinant = determinant + (Math.pow(-1, i%2) * (this.values.get(0).get(i) * subMatrixDet));
             }
         }
-//        //to delete from here
-//        ArrayList<Integer> myKey = new ArrayList(withoutIndices);
-//        determinantTracker.put(myKey, determinant);
+        ArrayList<Integer> myKey = new ArrayList(withoutIndices);
+        determinantTracker.put(myKey, determinant);
 //        withoutIndices.remove(withoutIndices.size()-1); // this step is causing the error --> maybe relocate?
         return determinant;
     }
