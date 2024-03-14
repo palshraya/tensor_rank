@@ -83,9 +83,10 @@ public class MatrixConstructor {
     //is a way to make this faster by storing the rank of the submatrices in the dict
     public int Rank() {
         if (this.Determinant() != 0.0) {
+            System.out.println("full rank");
             return this.row;
         }
-        for (int i = 1; i < this.row; i++){
+        for (int i = 0; i < this.row; i++){
             for (HashMap.Entry<ArrayList<Integer>, Double> entry : determinantTracker.entrySet()) {
                 ArrayList<Integer> key = entry.getKey();
                 Double value = entry.getValue();
