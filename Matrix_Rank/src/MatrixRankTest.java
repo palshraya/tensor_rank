@@ -37,7 +37,7 @@ public class MatrixRankTest {
     @Test
     //check whether determinant on more complicated matrix works
     public void ComplexDeterminant(){
-        double[] myElems = new double[]{1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0};
+        int[] myElems = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
         MatrixConstructor matrix = new MatrixConstructor(3, 3, myElems);
         System.out.println(matrix.Determinant());
         System.out.println(matrix.determinantTracker);
@@ -46,7 +46,7 @@ public class MatrixRankTest {
     @Test
     //check rank method for complex matrix
     public void RankMoreComplex(){
-        double[] myElems = new double[]{93.0, 186.0, 12.0, 279.0, 28.0, 61.0, 122.0, 35.0, 183.0, 19.0, 63.0, 126.0, 8.0, 189.0, 25.0, 57.0, 114.0, 94.0, 171.0, 72.0, 6.0, 12.0, 84.0, 18.0, 11.0};
+        int[] myElems = new int[]{93, 186, 12, 270, 28, 61, 122, 35, 183, 19, 63, 126, 8, 189, 25, 57, 114, 94, 171, 72, 6, 12, 84, 18, 11};
         MatrixConstructor matrix = new MatrixConstructor(5, 5, myElems);
         System.out.println("the matrix is: " + matrix.values);
         matrix.Rank();
@@ -55,7 +55,7 @@ public class MatrixRankTest {
     @Test
     //check rank method for more simple matrix
     public void RankMoreSimple(){
-        double[] myElems = new double[]{1.0, 2.0, 5.0, 8.0, 9.0, 2.0, 3.0, 4.0, 5.0};
+        int[] myElems = new int[]{1, 2, 5, 8, 9, 2, 3, 4, 5};
         MatrixConstructor matrix = new MatrixConstructor(3, 3, myElems);
         System.out.println("the matrix is: " + matrix.values);
         matrix.Rank();
@@ -64,15 +64,15 @@ public class MatrixRankTest {
     @Test
     // check product of two vectors
     public void checkProduct() {
-        ArrayList<Double> a = new ArrayList<>();
-        a.add(1.0);
-        a.add(2.0);
-        a.add(3.0);
+        ArrayList<Integer> a = new ArrayList<>();
+        a.add(1);
+        a.add(2);
+        a.add(3);
 
-        ArrayList<Double> b = new ArrayList<>();
-        b.add(4.0);
-        b.add(5.0);
-        b.add(6.0);
+        ArrayList<Integer> b = new ArrayList<>();
+        b.add(4);
+        b.add(5);
+        b.add(6);
 
         MatrixConstructor m = new MatrixConstructor(3, 3, HeatMapData.product(a, b));
         m.Rank();
@@ -82,9 +82,16 @@ public class MatrixRankTest {
     @Test
     //checks matrix generator
     public void checkGen() {
-        MatrixConstructor generated = HeatMapData.matrixGenerator(2, 1);
+        MatrixConstructor generated = HeatMapData.matrixGenerator(5, 3);
         System.out.println(generated.values);
-        //generated.Rank();
+        generated.Rank();
+    }
+
+    @Test
+    //generates the data
+    public void checkData() {
+        HeatMapData.dataMaker(25, 25);
+        System.out.println(HeatMapData.DATA);
     }
 
 
