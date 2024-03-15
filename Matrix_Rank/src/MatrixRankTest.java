@@ -90,7 +90,7 @@ public class MatrixRankTest {
     @Test
     //generates the data
     public void checkData() {
-        HeatMapData.dataMaker(25, 25);
+        HeatMapData.dataMaker(10, 10);
         System.out.println(HeatMapData.DATA);
     }
 

@@ -53,7 +53,7 @@ public class HeatMapData {
     public static void dataMaker(int maxDim, int maxRank) {
         for (int i = 0; i < maxRank; i ++) {
             for (int j = 0; j < maxDim; j ++) {
-                if (i < j) {
+                if (i =< j) {
                     // generate the matrix of rank i, of dim j
                     MatrixConstructor myMatrix = matrixGenerator(j, i);
 
