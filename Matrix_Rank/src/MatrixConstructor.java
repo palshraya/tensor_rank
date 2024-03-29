@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 public class MatrixConstructor {
     public int row;
     public int col;
+
+    public int[] rawVals;
     public ArrayList<ArrayList<Integer>> values;
     public static HashMap<ArrayList<Integer>, Integer> determinantTracker = new HashMap<>(); //TreeMap, fix array comparable method
     public static ArrayList<Integer> withoutIndices = new ArrayList<>();
@@ -16,6 +18,7 @@ public class MatrixConstructor {
     public MatrixConstructor(int r, int c, int[] v) {
         this.row = r;
         this.col = c;
+        this.rawVals = v;
         determinantTracker.clear(); // janky
         this.values = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < this.row; i++) {
@@ -31,6 +34,41 @@ public class MatrixConstructor {
         this.row = r;
         this.col = c;
         this.values = v;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder myString = new StringBuilder();
+        for (int i=0; i<this.values.size(); i++){
+            myString.append(this.values.get(i));
+            myString.append('\n');
+        }
+        return myString.toString();
+    }
+
+    //turns MatrixConstructor into double[][]
+    public double[][] formatConverterToArray() {
+        double[][] toReturn = new double[this.row][this.col];
+        for (int row = 0; row < this.row; row++) {
+            for (int col = 0; col < this.col; col++) {
+                toReturn[row][col] = this.values.get(row).get(col).doubleValue();
+            }
+        }
+        return toReturn;
+    }
+
+    public static MatrixConstructor formatConverterFromArray(double[][] values) {
+        int numRows = values.length;
+        int numCols = values[0].length;
+        int[] myVals = new int[numRows*numCols];
+        for (int row = 0; row < numRows; row++) {
+            for (int col = 0; col < numCols; col++) {
+                myVals[(numCols * row) + col] = (int) Math.round(values[row][col]);
+            }
+        }
+
+        MatrixConstructor myMatrix = new MatrixConstructor(numRows, numCols, myVals);
+        return myMatrix;
     }
 
     // creates array values for N x N identity matrix
@@ -112,8 +150,6 @@ public class MatrixConstructor {
         }
         return indices;
     }
-
-
 
 }
 
